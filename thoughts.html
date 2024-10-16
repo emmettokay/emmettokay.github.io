@@ -18,7 +18,7 @@
     <script>
         const GITHUB_API_URL = 'https://api.github.com/repos/emmettokay/emmettokay.github.io/contents/content/thoughts';
 
-        // Function to load thoughts dynamically
+        // Load thoughts dynamically and sort by date
         async function loadThoughts() {
             const container = document.getElementById('thoughts-container');
             container.innerHTML = ''; // Clear loading message
@@ -29,6 +29,10 @@
                     container.innerHTML = '<p>No thoughts available.</p>';
                 } else {
                     const posts = await Promise.all(files.map(fetchAndParseMarkdown));
+                    
+                    // Sort posts by date in descending order
+                    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                     posts.forEach(post => {
                         const article = document.createElement('article');
                         article.innerHTML = `
