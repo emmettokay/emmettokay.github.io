@@ -14,46 +14,71 @@
     <main id="thoughts-container">
         <p>Loading thoughts...</p>
     </main>
-    
+
     <script>
+        const GITHUB_API_URL = 'https://api.github.com/repos/emmettokay/emmettokay.github.io/contents/content/thoughts';
+
+        // Function to load thoughts dynamically
         async function loadThoughts() {
             const container = document.getElementById('thoughts-container');
-            container.innerHTML = '';
+            container.innerHTML = ''; // Clear loading message
 
             try {
-                const posts = await fetchMarkdownPosts();
-                posts.forEach(post => {
-                    const article = document.createElement('article');
-                    article.innerHTML = `
-                        <h2>${post.title}</h2>
-                        <p><strong>Date:</strong> ${post.date}</p>
-                        <p>${post.content}</p>
-                    `;
-                    container.appendChild(article);
-                });
+                const files = await fetchMarkdownFiles();
+                if (files.length === 0) {
+                    container.innerHTML = '<p>No thoughts available.</p>';
+                } else {
+                    const posts = await Promise.all(files.map(fetchAndParseMarkdown));
+                    posts.forEach(post => {
+                        const article = document.createElement('article');
+                        article.innerHTML = `
+                            <h2>${post.title}</h2>
+                            <p><strong>Date:</strong> ${post.date}</p>
+                            <p>${post.content}</p>
+                        `;
+                        container.appendChild(article);
+                    });
+                }
             } catch (error) {
+                console.error('Error loading thoughts:', error);
                 container.innerHTML = '<p>Error loading thoughts.</p>';
-                console.error(error);
             }
         }
 
-        async function fetchMarkdownPosts() {
-            const files = ['content/thoughts/2024-10-16-first-post.md', 'content/thoughts/2024-10-18-second-post.md'];
-
-            const posts = await Promise.all(files.map(async (file) => {
-                const response = await fetch(file);
-                const text = await response.text();
-                return parseMarkdown(text);
-            }));
-
-            return posts;
+        // Fetch the list of Markdown files from GitHub's API
+        async function fetchMarkdownFiles() {
+            try {
+                const response = await fetch(GITHUB_API_URL);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch file list: ${response.statusText}`);
+                }
+                const files = await response.json();
+                return files.filter(file => file.name.endsWith('.md')).map(file => file.download_url);
+            } catch (error) {
+                console.error('Error fetching markdown files:', error);
+                return [];
+            }
         }
 
+        // Fetch and parse individual Markdown file content
+        async function fetchAndParseMarkdown(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
+                }
+                const text = await response.text();
+                return parseMarkdown(text);
+            } catch (error) {
+                console.error('Error fetching markdown content:', error);
+                return { title: 'Error', date: 'Unknown', content: 'Could not load content.' };
+            }
+        }
+
+        // Parse the Markdown content with front matter
         function parseMarkdown(markdown) {
-            const [meta, content] = markdown.split('---
-').slice(1);
-            const metaLines = meta.trim().split('
-');
+            const [meta, content] = markdown.split('---\n').slice(1);
+            const metaLines = meta.trim().split('\n');
             const metadata = metaLines.reduce((acc, line) => {
                 const [key, value] = line.split(': ');
                 acc[key.trim()] = value.trim();
@@ -62,6 +87,7 @@
             return { ...metadata, content };
         }
 
+        // Load thoughts when the page loads
         loadThoughts();
     </script>
 </body>
