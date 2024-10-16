@@ -8,15 +8,19 @@
     <style>
         body {
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            justify-content: flex-start;
+            align-items: flex-end;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
         }
+        main {
+            max-width: 50%; /* Keep text within the left half of the page */
+            margin-left: 40px; /* Space from the left side */
+        }
         p {
-            text-align: center;
+            text-align: left;
             margin-bottom: 40px; /* Adjust spacing from the bottom */
         }
     </style>
