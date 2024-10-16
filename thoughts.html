@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My (Briefer) Thoughts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>My (Briefer) Thoughts</h1>
+        <p>These are small updates that live on my site.</p>
+    </header>
+    <main id="thoughts-container">
+        <p>Loading thoughts...</p>
+    </main>
+    
+    <script>
+        async function loadThoughts() {
+            const container = document.getElementById('thoughts-container');
+            container.innerHTML = '';
+
+            try {
+                const posts = await fetchMarkdownPosts();
+                posts.forEach(post => {
+                    const article = document.createElement('article');
+                    article.innerHTML = `
+                        <h2>${post.title}</h2>
+                        <p><strong>Date:</strong> ${post.date}</p>
+                        <p>${post.content}</p>
+                    `;
+                    container.appendChild(article);
+                });
+            } catch (error) {
+                container.innerHTML = '<p>Error loading thoughts.</p>';
+                console.error(error);
+            }
+        }
+
+        async function fetchMarkdownPosts() {
+            const files = ['content/thoughts/2024-10-16-first-post.md', 'content/thoughts/2024-10-18-second-post.md'];
+
+            const posts = await Promise.all(files.map(async (file) => {
+                const response = await fetch(file);
+                const text = await response.text();
+                return parseMarkdown(text);
+            }));
+
+            return posts;
+        }
+
+        function parseMarkdown(markdown) {
+            const [meta, content] = markdown.split('---
+').slice(1);
+            const metaLines = meta.trim().split('
+');
+            const metadata = metaLines.reduce((acc, line) => {
+                const [key, value] = line.split(': ');
+                acc[key.trim()] = value.trim();
+                return acc;
+            }, {});
+            return { ...metadata, content };
+        }
+
+        loadThoughts();
+    </script>
+</body>
+</html>
