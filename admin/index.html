@@ -8,18 +8,17 @@
   <!-- Load Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Load Netlify CMS from jsDelivr CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/netlify-cms@2.15.72/dist/netlify-cms.min.js"></script>
+  <!-- Load Netlify CMS -->
+  <script src="/admin/netlify-cms.min.js"></script> <!-- Local copy -->
+
 </head>
 <body>
-  <!-- CMS Mounting Point -->
-  <div id="nc-root"></div> <!-- Ensure this element exists -->
+  <div id="nc-root"></div> <!-- CMS Mounting Point -->
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
-      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
       if (identity) {
         console.log("Netlify Identity found");
@@ -31,17 +30,14 @@
             });
           }
         });
-        identity.init();  // Initialize Identity Widget
+        identity.init();
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Initialize CMS when it's available
       if (window.CMS) {
         console.log("CMS found, initializing...");
-        CMS.init({
-          config: '/admin/config.yml'  // Ensure the config path is correct
-        });
+        CMS.init({ config: '/admin/config.yml' });
       } else {
         console.error("CMS not found");
       }
