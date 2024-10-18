@@ -1,0 +1,17 @@
+backend:
+  name: github
+  repo: emmettokay/emmettokay.github.io # Replace with your GitHub repo
+  branch: main
+
+media_folder: static/img/uploads # Optional folder for media files
+public_folder: /img/uploads
+
+collections:
+  - name: "thoughts"
+    label: "My (Briefer) Thoughts"
+    folder: "content/thoughts"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
