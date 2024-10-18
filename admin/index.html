@@ -8,17 +8,13 @@
   <!-- Load Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Load Decap CMS from CDN -->
-  <script src="https://unpkg.com/netlify-cms@2.10.72/dist/netlify-cms.min.js"></script>
-</head>
-<body>
-  <div id="nc-root"></div> <!-- CMS Mounting Point -->
+  <!-- ESM Import for Decap CMS -->
+  <script type="module">
+    import CMS from 'https://cdn.jsdelivr.net/npm/netlify-cms-app@2.15.72/dist/netlify-cms.js';
 
-  <script>
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
-      // Initialize Netlify Identity Widget
       const identity = window.netlifyIdentity;
       if (identity) {
         console.log("Netlify Identity found");
@@ -35,16 +31,15 @@
         console.error("Netlify Identity not found");
       }
 
-      // Initialize the CMS after Identity is ready
-      if (window.CMS) {
-        console.log("CMS found, initializing...");
-        CMS.init({
-          config: '/admin/config.yml',  // Ensure your config path is correct
-        });
-      } else {
-        console.error("CMS not found");
-      }
+      console.log("CMS found, initializing...");
+      CMS.init({
+        config: '/admin/config.yml',
+      });
     });
   </script>
+</head>
+<body>
+  <div id="nc-root"></div> <!-- CMS Mounting Point -->
 </body>
 </html>
+
