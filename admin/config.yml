@@ -1,11 +1,11 @@
 backend:
   name: github
-  repo: emmettokay/emmettokay.github.io # Replace with your GitHub repo
+  repo: emmettokay/emmettokay.github.io
   branch: main
+  auth_endpoint: https://github.com/login/oauth/authorize
 
-media_folder: static/img/uploads # Optional folder for media files
+media_folder: static/img/uploads
 public_folder: /img/uploads
-auth_endpoint: https://github.com/login/oauth/authorize
 
 collections:
   - name: "thoughts"
