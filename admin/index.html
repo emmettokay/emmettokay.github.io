@@ -23,25 +23,6 @@
 
       if (identity) {
         console.log("Netlify Identity found");
-
         identity.on('init', (user) => {
-          console.log("Identity initialized:", user);
-          if (!user) {
-            identity.on('login', () => {
-              document.location.href = '/admin/';
-            });
-          }
-        });
+          console.log("Identity
 
-        // Initialize Netlify Identity
-        identity.init();
-      } else {
-        console.error("Netlify Identity not found");
-      }
-
-      // Initialize the CMS
-      CMS.init();
-    });
-  </script>
-</body>
-</html>
