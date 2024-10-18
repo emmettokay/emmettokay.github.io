@@ -1,17 +1,32 @@
 backend:
-  name: git-gateway
-  branch: main  # Change if your default branch is not 'main'
+  name: git-gateway  # Use Git Gateway for authentication
+  branch: main  # Default branch of your repo
 
-media_folder: static/img/uploads
-public_folder: /img/uploads
+media_folder: static/img/uploads  # Where uploaded media will be stored in your repo
+public_folder: /img/uploads  # Public URL path for media files
+
+site_url: https://emtgvy.com  # Your custom domain
 
 collections:
   - name: "thoughts"
     label: "My (Briefer) Thoughts"
-    folder: "content/thoughts"
+    folder: "content/thoughts"  # Folder for your "briefer thoughts" posts
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"  # URL slug format for posts
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime", default: "now" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Title", name: "title", widget: "string" }  # Post title
+      - { label: "Date", name: "date", widget: "datetime", default: "now" }  # Date field with default value as now
+      - { label: "Body", name: "body", widget: "markdown" }  # Markdown field for the post content
+
+publish_mode: editorial_workflow  # Allows for draft and review stages before publishing
+
+slug:
+  encoding: unicode  # Allows non-ASCII characters in slugs
+  clean_accents: true  # Cleans accented characters from slugs
+
+display_url: https://emtgvy.com  # URL where the CMS will be displayed
+
+# Optional settings for Netlify Identity
+identity:
+  enable: true
+
