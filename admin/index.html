@@ -31,15 +31,17 @@
             });
           }
         });
-        identity.init();  // Initialize the Identity Widget
+        identity.init();  // Initialize Netlify Identity
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Ensure CMS is defined before calling init
+      // Initialize CMS
       if (window.CMS) {
         console.log("CMS found, initializing...");
-        CMS.init({ config: '/admin/config.yml' });  // Initialize CMS with the config file path
+        CMS.init({
+          config: '/admin/config.yml',
+        });  // Initialize CMS with the config path
       } else {
         console.error("CMS not found");
       }
@@ -47,5 +49,6 @@
   </script>
 </body>
 </html>
+
 
 
