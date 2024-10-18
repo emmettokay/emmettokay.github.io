@@ -9,17 +9,15 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <!-- Load Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script src="https://unpkg.com/netlify-cms@latest/dist/netlify-cms.min.js"></script>
 </head>
 <body>
-  <!-- CMS Mounting Point -->
-  <div id="nc-root"></div> <!-- Ensure this div exists -->
+  <div id="nc-root"></div> <!-- CMS Mounting Point -->
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
-      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
       if (identity) {
         console.log("Netlify Identity found");
@@ -31,15 +29,14 @@
             });
           }
         });
-        identity.init();  // Initialize Identity Widget
+        identity.init();
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Ensure CMS is loaded and mount it
       if (window.CMS) {
         console.log("CMS found, initializing...");
-        CMS.init();  // Initialize the CMS
+        CMS.init({ config: '/admin/config.yml' });
       } else {
         console.error("CMS not found");
       }
@@ -47,3 +44,4 @@
   </script>
 </body>
 </html>
+
