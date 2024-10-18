@@ -5,6 +5,9 @@ backend:
 
 media_folder: static/img/uploads # Optional folder for media files
 public_folder: /img/uploads
+auth_endpoint: https://github.com/login/oauth/authorize
+client_id: Ov23liif9pI6dMzxeegz
+client_secret: 418081475e1a92da5c43367af043beda5f5194c0
 
 collections:
   - name: "thoughts"
