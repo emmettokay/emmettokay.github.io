@@ -6,16 +6,25 @@
     <title>Home</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Substack Button Styling */
+        /* Subscribe Button Styling */
         .substack-button {
-            position: fixed;
-            bottom: 40px; /* Keep padding consistent */
-            right: 40px; /* Keep padding consistent */
-            width: 480px;
-            height: 320px;
-            border: none; /* Remove the iframe border */
-            background-color: transparent; /* Transparent background */
-            z-index: 1000; /* Ensure it stays on top */
+            display: inline-block;
+            background-color: white;
+            color: #001a33;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .substack-button:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
@@ -24,23 +33,22 @@
 
     <nav>
         <ul>
-            <li><a href="https://emmettgarvey.substack.com" target="_blank">My thoughts</a></li>
+            <li><a href="https://emtgvy.substack.com" target="_blank">My thoughts</a></li>
             <li><a href="thoughts.html">My (briefer) thoughts</a></li>
-            <li><a href="https://literal.club/emmett" target="_blank">What I'm reading</a></li>
+            <li><a href="https://www.goodreads.com/user/show/93225591?ref=nav_profile_l" target="_blank">What I'm reading</a></li>
             <li><a href="https://letterboxd.com/ejg22/" target="_blank">What I'm watching</a></li>
-            <li><a href="what-im-about.html">What I'm About</a></li>
+            <li><a href="what-im-about.html">What I'm about</a></li>
         </ul>
     </nav>
 
-    <!-- Substack Subscribe Button with Transparent Background -->
-    <iframe 
-        src="https://emtgvy.substack.com/embed" 
-        class="substack-button" 
-        frameborder="0" 
-        scrolling="no"
-        allowtransparency="true">
-    </iframe>
+    <!-- Subscribe Button -->
+    <div style="position: fixed; bottom: 40px; right: 40px;">
+        <a 
+            href="https://emtgvy.substack.com/subscribe" 
+            target="_blank" 
+            class="substack-button">
+            Subscribe to my Substack
+        </a>
+    </div>
 </body>
 </html>
-
-
