@@ -19,11 +19,10 @@
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
+      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
-
       if (identity) {
         console.log("Netlify Identity found");
-
         identity.on('init', (user) => {
           console.log("Identity initialized:", user);
           if (!user) {
@@ -32,17 +31,15 @@
             });
           }
         });
-
-        // Initialize Netlify Identity
-        identity.init();
+        identity.init();  // Initialize the Identity Widget
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Ensure CMS is defined before calling CMS.init()
+      // Ensure CMS is defined before calling init
       if (window.CMS) {
         console.log("CMS found, initializing...");
-        CMS.init();  // Initialize the CMS
+        CMS.init({ config: '/admin/config.yml' });  // Initialize CMS with the config file path
       } else {
         console.error("CMS not found");
       }
@@ -50,4 +47,5 @@
   </script>
 </body>
 </html>
+
 
