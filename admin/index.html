@@ -4,17 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+</head>
+<body>
+  <!-- CMS Mounting Point -->
+  <div id="nc-root"></div>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
-      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
+
       if (identity) {
         console.log("Netlify Identity found");
-        identity.on('init', user => {
+
+        identity.on('init', (user) => {
           console.log("Identity initialized:", user);
           if (!user) {
             identity.on('login', () => {
@@ -22,15 +32,14 @@
             });
           }
         });
-        identity.init();  // Initialize the widget
+
+        identity.init();  // Initialize Netlify Identity
       } else {
         console.error("Netlify Identity not found");
       }
     });
   </script>
-</head>
-<body>
-  <h1>Loading CMS...</h1>
 </body>
 </html>
+
 
