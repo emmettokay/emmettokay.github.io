@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
 
-  <!-- Netlify Identity Widget -->
+  <!-- Load Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Netlify CMS -->
+  <!-- Load Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </head>
 <body>
   <!-- CMS Mounting Point -->
-  <div id="nc-root"></div>
+  <div id="nc-root"></div> <!-- Ensure this div exists -->
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
+      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
       if (identity) {
         console.log("Netlify Identity found");
@@ -30,12 +31,12 @@
             });
           }
         });
-        identity.init();  // Initialize Netlify Identity Widget
+        identity.init();  // Initialize Identity Widget
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Check for CMS and initialize it
+      // Ensure CMS is loaded and mount it
       if (window.CMS) {
         console.log("CMS found, initializing...");
         CMS.init();  // Initialize the CMS
@@ -46,4 +47,3 @@
   </script>
 </body>
 </html>
-
