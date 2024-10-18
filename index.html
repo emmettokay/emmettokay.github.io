@@ -5,30 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Substack Button Styling */
+        .substack-button {
+            position: fixed;
+            bottom: 40px; /* Keep padding consistent */
+            right: 40px; /* Keep padding consistent */
+            width: 480px;
+            height: 320px;
+            border: none; /* Remove the iframe border */
+            background-color: transparent; /* Transparent background */
+            z-index: 1000; /* Ensure it stays on top */
+        }
+    </style>
 </head>
 <body>
-    <a href="index.html" class="home-button">Emmett</a>
+    <a href="index.html" class="home-button">Emmett</a> <!-- Home Button -->
 
-    <header>
-    
-    </header>
     <nav>
         <ul>
-            <li><a href="https://emtgvy.substack.com/" target="_blank">My thoughts</a></li>
+            <li><a href="https://emmettgarvey.substack.com" target="_blank">My thoughts</a></li>
             <li><a href="thoughts.html">My (briefer) thoughts</a></li>
-            <li><a href="https://www.goodreads.com/user/show/93225591?ref=nav_profile_l" target="_blank">What I'm reading</a></li>
+            <li><a href="https://literal.club/emmett" target="_blank">What I'm reading</a></li>
             <li><a href="https://letterboxd.com/ejg22/" target="_blank">What I'm watching</a></li>
-            <li><a href="what-im-about.html">What I'm about</a></li>
+            <li><a href="what-im-about.html">What I'm About</a></li>
         </ul>
     </nav>
-    
-        <!-- Substack Subscribe Button -->
+
+    <!-- Substack Subscribe Button with Transparent Background -->
     <iframe 
         src="https://emtgvy.substack.com/embed" 
         class="substack-button" 
         frameborder="0" 
-        scrolling="no">
+        scrolling="no"
+        allowtransparency="true">
     </iframe>
 </body>
 </html>
+
 
