@@ -23,6 +23,31 @@
 
       if (identity) {
         console.log("Netlify Identity found");
+
         identity.on('init', (user) => {
-          console.log("Identity
+          console.log("Identity initialized:", user);
+          if (!user) {
+            identity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+
+        // Initialize Netlify Identity
+        identity.init();
+      } else {
+        console.error("Netlify Identity not found");
+      }
+
+      // Ensure CMS is defined before calling CMS.init()
+      if (window.CMS) {
+        console.log("CMS found, initializing...");
+        CMS.init();  // Initialize the CMS
+      } else {
+        console.error("CMS not found");
+      }
+    });
+  </script>
+</body>
+</html>
 
