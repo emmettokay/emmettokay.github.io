@@ -19,7 +19,6 @@
     document.addEventListener("DOMContentLoaded", function () {
       console.log("CMS script loaded");
 
-      // Initialize Netlify Identity
       const identity = window.netlifyIdentity;
       if (identity) {
         console.log("Netlify Identity found");
@@ -31,17 +30,38 @@
             });
           }
         });
-        identity.init();  // Initialize Netlify Identity
+        identity.init();  // Initialize Identity Widget
       } else {
         console.error("Netlify Identity not found");
       }
 
-      // Initialize CMS
+      // Wait until the DOM is fully loaded to initialize CMS
       if (window.CMS) {
         console.log("CMS found, initializing...");
         CMS.init({
-          config: '/admin/config.yml',
-        });  // Initialize CMS with the config path
+          config: {
+            backend: {
+              name: 'git-gateway',
+              branch: 'main',
+            },
+            media_folder: 'static/img/uploads',
+            public_folder: '/img/uploads',
+            collections: [
+              {
+                name: 'thoughts',
+                label: 'My (Briefer) Thoughts',
+                folder: 'content/thoughts',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Date', name: 'date', widget: 'datetime', default: 'now' },
+                  { label: 'Body', name: 'body', widget: 'markdown' },
+                ],
+              },
+            ],
+          },
+        });
       } else {
         console.error("CMS not found");
       }
@@ -49,6 +69,4 @@
   </script>
 </body>
 </html>
-
-
 
