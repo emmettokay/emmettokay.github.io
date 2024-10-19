@@ -8,8 +8,8 @@
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- UMD Build for Decap CMS -->
-  <script src="https://unpkg.com/netlify-cms@2.10.49/dist/netlify-cms.js"></script>
+  <!-- Decap CMS UMD Build -->
+  <script src="https://unpkg.com/netlify-cms-app@2.10.49/dist/netlify-cms.js"></script>
 
   <style>
     body {
@@ -55,7 +55,7 @@
 
 <body>
 
-  <!-- Back to Home Button -->
+  <!-- Home Button -->
   <button class="home-button" onclick="window.location.href='/'">Back to Home</button>
 
   <!-- CMS Mounting Point -->
@@ -81,13 +81,14 @@
         console.error("Netlify Identity not found");
       }
 
-      if (window.CMS) {
+      // Ensure CMS is initialized only after the DOM is fully loaded
+      if (document.getElementById('nc-root')) {
         console.log("CMS found, initializing...");
         CMS.init({
-          config: '/admin/config.yml'
+          config: '/admin/config.yml',
         });
       } else {
-        console.error("CMS not found");
+        console.error("#nc-root element not found");
       }
     });
   </script>
