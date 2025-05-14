@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
+     xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+     xmlns:media="http://search.yahoo.com/mrss/" 
+     version="2.0">
   <channel>
-    <title>670 the score</title>
-    <description>670 the score</description>
+    <title>670 The Score</title>
+    <description>Live stream of 670 The Score (WSCR AM)</description>
     <language>en-us</language>
+    <link>https://www.audacy.com/670thescore</link>
+    <lastBuildDate>{{timestamp}}</lastBuildDate>
+    <pubDate>{{timestamp}}</pubDate>
+    <itunes:author>Audacy</itunes:author>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:category text="Sports"/>
 
-    <!-- Stream1 -->
+    <!-- Live Stream Item -->
     <item>
-      <title>670 the score</title>
-      <enclosure length="0" type="audio/mpeg" url="https://playerservices.streamtheworld.com/api/livestream-redirect/WSCRAMAAC_SC"/>
+      <title>Live: 670 The Score</title>
+      <description>Streaming audio of 670 The Score — Chicago Sports Radio</description>
+      <enclosure 
+        url="https://playerservices.streamtheworld.com/api/livestream-redirect/WSCRAMAAC_SC" 
+        length="0" 
+        type="audio/mpeg"/>
+      <guid>wscr670-live</guid>
+      <pubDate>{{timestamp}}</pubDate>
     </item>
-
   </channel>
 </rss>
