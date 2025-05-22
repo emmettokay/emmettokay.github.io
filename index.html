@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Subscribe Button Styling */
-        .substack-button {
-            display: inline-block;
-            background-color: white;
-            color: #001a33;
-            text-decoration: none;
-            padding: 8px 16px; /* Reduced padding for a smaller button */
-            border-radius: 25px;
-            font-size: 14px; /* Slightly smaller font */
-            font-family: "Courier New", Courier, monospace;
-            font-weight: bold;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="styles.css" />
 
-        .substack-button:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <style>
+    /* Subscribe Button Styling */
+    .substack-button,
+    .email-button {
+      display: inline-block;
+      background-color: white;
+      color: #001a33;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .substack-button:hover,
+    .email-button:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </head>
 <body>
-    <a href="index.html" class="home-button">Emmett</a> <!-- Home Button -->
+  <a href="index.html" class="home-button">Emmett</a> <!-- Home Button -->
 
-    <nav>
-        <ul>
-            <li><a href="https://emtgvy.substack.com" target="_blank">My thoughts</a></li>
-            <li><a href="https://www.goodreads.com/user/show/93225591-emmett" target="_blank">What I'm reading</a></li>
-            <li><a href="https://letterboxd.com/ejg22/" target="_blank">What I'm watching</a></li>
-            
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="https://emtgvy.substack.com" target="_blank">My thoughts</a></li>
+      <li><a href="https://www.goodreads.com/user/show/93225591-emmett" target="_blank">What I'm reading</a></li>
+      <li><a href="https://letterboxd.com/ejg22/" target="_blank">What I'm watching</a></li>
+    </ul>
+  </nav>
 
-    <!-- Subscribe Button -->
-    <div style="position: fixed; bottom: 40px; right: 40px;">
-        <a 
-            href="https://emtgvy.substack.com/subscribe" 
-            target="_blank" 
-            class="substack-button">
-            Subscribe to my Substack
-        </a>
-    </div>
+  <!-- Subscribe Button (Bottom Right) -->
+  <div style="position: fixed; bottom: 40px; right: 40px;">
+    <a
+      href="https://emtgvy.substack.com/subscribe"
+      target="_blank"
+      class="substack-button">
+      Subscribe to my Substack
+    </a>
+  </div>
+
+  <!-- Email Me Button (Bottom Left) -->
+  <div style="position: fixed; bottom: 40px; left: 40px;">
+    <button id="emailButton" class="email-button">Email Me</button>
+  </div>
+
+  <!-- Email Button Script -->
+  <script>
+    const user = "ejoegarvey";
+    const domain = "gmail.com";
+    const email = `${user}@${domain}`;
+    document.getElementById("emailButton").addEventListener("click", function () {
+      window.location.href = `mailto:${email}`;
+    });
+  </script>
 </body>
 </html>
-
